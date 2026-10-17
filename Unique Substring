@@ -1,0 +1,28 @@
+public class Solution {
+    public int longestUniqueSubstringLength(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        HashMap<Character, Integer> lastSeen = new HashMap<>();
+        int maxLength = 0;
+        int left = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char currentChar = s.charAt(right);
+
+            // If the character was seen inside the current window, move the left pointer
+            if (lastSeen.containsKey(currentChar)) {
+                left = Math.max(left, lastSeen.get(currentChar) + 1);
+            }
+
+            // Update the last seen position of the character
+            lastSeen.put(currentChar, right);
+
+            // Update the maximum unique length found so far
+            maxLength = Math.max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
+    }
+}
