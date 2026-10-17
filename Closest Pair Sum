@@ -1,0 +1,22 @@
+public class Solution{
+    public static int closestSumDifference(int[] numbers, int target) {
+        Arrays.sort(numbers);
+        int left=0,right=numbers.length-1;
+        int minDif=999;
+        while(left<right){
+        int sum=numbers[left]+numbers[right];
+        int diff=Math.abs(target-sum);
+        minDif=Math.min(minDif,diff) ;
+
+        if(sum==target)
+        return 0;
+        else if(sum<target)
+        left++;
+        else
+        right--;
+        }
+      return minDif;  
+    }
+}
+
+//u can use 2 for loops to add and find out  sum but 0(n^2) Time Complexity
